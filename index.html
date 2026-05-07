@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>خط الدفاع الأول — القوات المسلحة الإماراتية</title>
 <style>
+
 /* ===== GLOBAL ===== */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
 
@@ -16,6 +17,8 @@
   --dark: #0a0a0a;
   --dark2: #111111;
   --dark3: #1a1a1a;
+  --red: #c8102e;
+  --green: #00732f;
   --white: #ffffff;
 }
 
@@ -28,7 +31,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== HERO ===== */
+/* ===== HERO / MAIN ===== */
 #hero {
   position: relative;
   min-height: 100vh;
@@ -36,19 +39,35 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   text-align: center;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, #1a1500 0%, #050505 100%);
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(200,16,46,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(0,115,47,0.08) 0%, transparent 60%),
+    linear-gradient(180deg, #000 0%, #050505 50%, #0a0800 100%);
+  z-index: 0;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
   z-index: 0;
 }
 
 .flag-bar {
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 5px;
   background: linear-gradient(to right, #00732f 33.33%, #fff 33.33%, #fff 66.66%, #c8102e 66.66%);
   z-index: 10;
@@ -56,68 +75,227 @@ body {
 
 .hero-header {
   position: absolute;
-  top: 20px;
+  top: 10px;
+  z-index: 2;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
-  z-index: 5;
+  padding: 20px 40px;
 }
 
-.header-logo img { height: 60px; filter: drop-shadow(0 0 10px rgba(201,168,76,0.5)); }
+.header-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
 
-.hero-content { position: relative; z-index: 2; }
-.hero-title { font-size: 4em; font-weight: 900; background: linear-gradient(to bottom, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header-logo span { font-size: 28px; }
+.header-logo p { font-size: 0.65em; color: var(--gold); font-weight: 600; text-align: center; line-height: 1.3; }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 120px 20px 60px;
+}
+
+.hero-emblem {
+  font-size: 100px;
+  display: block;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 30px rgba(201,168,76,0.5));
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 0.8em;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.status-dot {
+  width: 8px; height: 8px;
+  background: #00ff88;
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+.hero-title {
+  font-size: clamp(2.2em, 6vw, 4.5em);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #fff 0%, var(--gold-light) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: clamp(1em, 2.5vw, 1.4em);
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.hero-divider {
+  width: 80px; height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 0 auto 30px;
+}
+
+/* ===== AUDIO BTN ===== */
+.audio-btn {
+  position: fixed;
+  top: 20px; left: 20px;
+  z-index: 1000;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; backdrop-filter: blur(10px);
+}
+
+/* ===== DASHBOARD ===== */
+#dashboard { background: var(--dark2); padding: 70px 20px; }
+.section-title { text-align: center; margin-bottom: 50px; }
+.section-title h2 { font-size: clamp(1.6em, 4vw, 2.5em); font-weight: 900; color: var(--white); }
+.section-title .gold-line { width: 60px; height: 3px; background: var(--gold); margin: 10px auto 0; }
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.dash-card {
+  background: linear-gradient(145deg, #111, #1a1500);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.dash-card:hover { transform: translateY(-6px); border-color: var(--gold); }
+
+/* ===== BRANCHES ===== */
+#branches { padding: 70px 20px; }
+.branches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.branch-card {
+  background: var(--dark3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.branch-img { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 70px; background: #0a0a0a; }
+.branch-body { padding: 22px; }
+.branch-name { font-size: 1.2em; font-weight: 800; margin-bottom: 10px; color: var(--gold); }
+
+/* ===== VALUES ===== */
+#values { padding: 70px 20px; background: #0a0800; }
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.value-card { text-align: center; padding: 30px 20px; border: 1px solid rgba(201,168,76,0.1); border-radius: 16px; }
+
+/* ===== LEADERSHIP ===== */
+#leadership { padding: 70px 20px; background: var(--dark2); }
+.leaders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.leader-card { background: #111; border: 1px solid rgba(201,168,76,0.2); border-radius: 16px; padding: 30px; text-align: center; }
+
+/* ===== MESSAGE SECTION (FIXED FOR ARABIC) ===== */
+#message { padding: 100px 20px; background: #000; text-align: center; }
+.message-box {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(201,168,76,0.03);
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(201,168,76,0.1);
+}
+
+.typewriter-text {
+  font-size: 1.2em;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.9);
+  min-height: 200px;
+  text-align: right;
+  direction: rtl;
+}
+
+.cursor {
+  display: inline-block; width: 3px; height: 1.2em;
+  background: var(--gold); margin-right: 5px;
+  animation: blink 0.8s infinite;
+  vertical-align: middle;
+}
 
 /* ===== NAV ===== */
 nav {
   position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-  z-index: 1000; display: flex; background: rgba(0,0,0,0.85);
-  padding: 10px 20px; border-radius: 50px; border: 1px solid var(--gold);
-}
-nav a { color: #fff; text-decoration: none; padding: 8px 15px; border-radius: 50px; font-size: 0.8em; transition: 0.3s; }
-nav a.active { background: var(--gold); color: #000; font-weight: bold; }
-
-/* ===== BRANCHES ===== */
-#branches { padding: 80px 20px; }
-.branches-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px; max-width: 1100px; margin: 0 auto;
-}
-.branch-card {
-  background: var(--dark3); border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 20px; padding: 30px; text-align: center; transition: 0.3s;
-}
-.branch-card:hover { transform: translateY(-10px); border-color: var(--gold); }
-.branch-card img { height: 100px; margin-bottom: 20px; }
-
-/* ===== LEADERSHIP ===== */
-#leadership { padding: 80px 20px; background: var(--dark2); }
-.leaders-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
-.leader-card { background: #000; padding: 40px; border-radius: 20px; border: 1px solid var(--gold); text-align: center; }
-
-/* ===== AUDIO BTN ===== */
-.audio-btn {
-  position: fixed; top: 20px; left: 20px; z-index: 1100;
-  background: #000; border: 1px solid var(--gold); color: var(--gold);
-  width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+  z-index: 500; display: flex; gap: 5px; background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px); padding: 8px 15px; border-radius: 50px; border: 1px solid rgba(201,168,76,0.2);
 }
 
-.reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
+nav a { color: #fff; text-decoration: none; font-size: 0.75em; padding: 8px 12px; }
+
+/* ===== REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
 </style>
 </head>
 <body onload="initSite()">
-
-<audio id="bgMusic" loop>
-  <source src="https://f.top4top.io/m_21200qf6f1.mp3" type="audio/mpeg">
-</audio>
 
 <button class="audio-btn" id="audioBtn" onclick="toggleAudio()">🔇</button>
 
 <nav>
   <a href="#hero">الرئيسية</a>
+  <a href="#dashboard">العمليات</a>
   <a href="#branches">الأفرع</a>
   <a href="#values">القيم</a>
   <a href="#leadership">القيادة</a>
@@ -127,84 +305,104 @@ nav a.active { background: var(--gold); color: #000; font-weight: bold; }
 <section id="hero">
   <div class="flag-bar"></div>
   <div class="hero-bg"></div>
+  <div class="grid-overlay"></div>
   <div class="hero-header">
-    <div class="header-logo"><img src="https://i.ibb.co/pPXh8kY/MES-Logo.png" alt="School"></div>
-    <div class="header-logo"><img src="https://i.ibb.co/vYm6pYd/UAEMilitary-Logo.png" alt="Armed Forces"></div>
+    <div class="header-logo"><span>🏫</span><p>مدرسة دبي للتربية الحديثة</p></div>
+    <div style="color:var(--gold); font-size:12px;">🇦🇪 الإمارات العربية المتحدة</div>
+    <div class="header-logo"><span>🛡️</span><p>القوات المسلحة</p></div>
   </div>
   <div class="hero-content">
+    <span class="hero-emblem">🛡️</span>
+    <div class="status-badge"><span class="status-dot"></span> حالة الاستعداد: قصوى</div>
     <h1 class="hero-title">خط الدفاع الأول</h1>
-    <p style="color:var(--gold); letter-spacing:5px;">حماة الوطن والاتحاد</p>
+    <p class="hero-subtitle">حماة السماء والبر والبحر</p>
+    <div class="hero-divider"></div>
+    <p style="letter-spacing:3px; opacity:0.6;">الله • الوطن • رئيس الدولة</p>
+  </div>
+</section>
+
+<section id="dashboard">
+  <div class="section-title reveal">
+    <h2>⚡ مركز العمليات الرقمي</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="dash-grid">
+    <div class="dash-card reveal"><h3>🎯 الجاهزية</h3><p style="color:#00ff88;">100% مستعدون</p></div>
+    <div class="dash-card reveal"><h3>🛡️ المهمة الحالية</h3><p>حماية أمن الوطن</p></div>
+    <div class="dash-card reveal"><h3>🌍 النطاق</h3><p>الإمارات السبع</p></div>
   </div>
 </section>
 
 <section id="branches">
-  <h2 style="text-align:center; margin-bottom:50px;">الأفرع الرئيسية</h2>
+  <div class="section-title reveal"><h2>🪖 أفرع القوات المسلحة</h2><div class="gold-line"></div></div>
   <div class="branches-grid">
-    <div class="branch-card reveal">
-      <img src="https://i.ibb.co/6R0yR6y/Air-Force.png" alt="Air Force">
-      <h3>القوات الجوية</h3>
-      <p>صقور السماء وحماة الفضاء الجوي.</p>
-    </div>
-    <div class="branch-card reveal">
-      <img src="https://i.ibb.co/v4m3S3m/Land-Forces.png" alt="Land Forces">
-      <h3>القوات البرية</h3>
-      <p>درع الوطن المتين على الأرض.</p>
-    </div>
-    <div class="branch-card reveal">
-      <img src="https://i.ibb.co/mqvGg9p/Navy.png" alt="Navy">
-      <h3>القوات البحرية</h3>
-      <p>حماة السواحل والمياه الإقليمية.</p>
-    </div>
-    <div class="branch-card reveal">
-      <img src="https://i.ibb.co/9V6Xv7X/PG.png" alt="PG">
-      <h3>الحرس الرئاسي</h3>
-      <p>القوة النخبوية لحماية الدولة.</p>
-    </div>
+    <div class="branch-card reveal"><div class="branch-img">✈️</div><div class="branch-body"><div class="branch-name">القوات الجوية</div><p>حراس السماء الإماراتية وصقورها الجارحة.</p></div></div>
+    <div class="branch-card reveal"><div class="branch-img">🪖</div><div class="branch-body"><div class="branch-name">القوات البرية</div><p>الدرع الفولاذي لحماية تراب الوطن.</p></div></div>
+    <div class="branch-card reveal"><div class="branch-img">🛡️</div><div class="branch-body"><div class="branch-name">الحرس الرئاسي</div><p>نخبة القوات المخصصة للمهام الاستراتيجية.</p></div></div>
+    <div class="branch-card reveal"><div class="branch-img">⚓</div><div class="branch-body"><div class="branch-name">القوات البحرية</div><p>سادة السواحل وحماة المياه الإقليمية.</p></div></div>
+  </div>
+</section>
+
+<section id="values">
+  <div class="values-grid">
+    <div class="value-card reveal"><h3>🤝 الإخلاص</h3><p>ولاء مطلق للوطن.</p></div>
+    <div class="value-card reveal"><h3>⚔️ الشجاعة</h3><p>إقدام لا يهاب الصعاب.</p></div>
+    <div class="value-card reveal"><h3>🏆 الانضباط</h3><p>دقة في تنفيذ المهام.</p></div>
   </div>
 </section>
 
 <section id="leadership">
   <div class="leaders-grid">
-    <div class="leader-card reveal">
-      <h4 style="color:var(--gold)">صاحب السمو</h4>
-      <h2>الشيخ محمد بن زايد</h2>
-      <p>"قواتنا المسلحة هي درع الوطن."</p>
-    </div>
-    <div class="leader-card reveal">
-      <h4 style="color:var(--gold)">صاحب السمو</h4>
-      <h2>الشيخ محمد بن راشد</h2>
-      <p>"القوي لا يخشى الريح."</p>
-    </div>
+    <div class="leader-card reveal"><h3>الشيخ محمد بن زايد</h3><p>"قواتنا هي درع الوطن."</p></div>
+    <div class="leader-card reveal"><h3>الشيخ محمد بن راشد</h3><p>"نحن نصنع المستقبل."</p></div>
   </div>
 </section>
 
-<script>
-function initSite() {
-  const obs = new IntersectionObserver((es) => {
-    es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+<section id="message">
+  <div class="message-box">
+    <h2 style="color:var(--gold); margin-bottom:20px;">🇦🇪 رسالة الوطن</h2>
+    <div class="typewriter-text" id="typewriter-el"></div>
+  </div>
+</section>
 
-  // نظام البار النشط
-  window.addEventListener('scroll', () => {
-    let curr = '';
-    document.querySelectorAll('section').forEach(s => {
-      if (pageYOffset >= s.offsetTop - 200) curr = s.getAttribute('id');
-    });
-    document.querySelectorAll('nav a').forEach(a => {
-      a.classList.remove('active');
-      if (a.getAttribute('href').includes(curr)) a.classList.add('active');
-    });
-  });
+<footer>
+  <p>© 2026 مدرسة دبي للتربية الحديثة - تصميم: إياد السعداوي</p>
+</footer>
+
+<script>
+const messageText = `يا وطني الإمارات، يا فخر العز والمجد، أنتَ الأرض التي نكبر على ترابها، ونعتز بانتمائنا إليها. فيك توحدت القلوب، وتصافحت الطموحات، وصُنع المجد بأيدي أبنائك المخلصين.
+
+نحبك لأنك الأمن حين يخاف العالم، ونفخر بك لأنك النجاح حين تعجز الأمم، ونحملك في قلوبنا راية لا تنكسر، وعهداً لا يُنسى.
+
+نرفع أسمى آيات الولاء والفخر إلى صاحب السمو الشيخ محمد بن زايد آل نهيان، وإلى صاحب السمو الشيخ محمد بن راشد آل مكتوم، وإلى رجال القوات المسلحة الإماراتية البواسل.
+
+دمتِ يا إمارات الخير رمزاً للعز والسيادة. 🇦🇪`;
+
+function initSite() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+  
+  const el = document.getElementById('typewriter-el');
+  let i = 0;
+  function type() {
+    if (i <= messageText.length) {
+      el.innerHTML = messageText.substring(0, i).replace(/\n/g, '<br>') + '<span class="cursor"></span>';
+      i++;
+      setTimeout(type, 40);
+    }
+  }
+  const msgObserver = new IntersectionObserver((entries) => {
+    if(entries[0].isIntersecting) { type(); msgObserver.disconnect(); }
+  }, { threshold: 0.5 });
+  msgObserver.observe(el);
 }
 
 function toggleAudio() {
-  const m = document.getElementById('bgMusic');
-  const b = document.getElementById('audioBtn');
-  if (m.paused) { m.play(); b.textContent = '🔊'; }
-  else { m.pause(); b.textContent = '🔇'; }
+  const btn = document.getElementById('audioBtn');
+  btn.textContent = (btn.textContent === '🔇') ? '🔊' : '🔇';
 }
 </script>
-
 </body>
 </html>
