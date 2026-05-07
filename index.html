@@ -59,9 +59,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(200,16,46,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(0,115,47,0.08) 0%, transparent 60%),
-    linear-gradient(180deg, #000 0%, #050505 50%, #0a0800 100%);
+        radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%),
+    linear-gradient(180deg, #000 0%, #050505 100%);
   z-index: 0;
 }
 
@@ -76,15 +75,9 @@ body {
 }
 
 .flag-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(to right, #00732f 33.33%, #fff 33.33%, #fff 66.66%, #c8102e 66.66%);
-  z-index: 10;
+  display: none;
 }
-
+  
 .hero-header {
   position: absolute;
   top: 10px;
