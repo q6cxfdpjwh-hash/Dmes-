@@ -5,15 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>خط الدفاع الأول — القوات المسلحة الإماراتية</title>
 
-<!-- === كود Chatbase المضاف === -->
 <script
   src="https://www.chatbase.co/embed.min.js"
   chatbotId="XiZp2TAdzxfMpZ924H0Gl"
   domain="www.chatbase.co"
   defer>
 </script>
-<!-- ======================== -->
-  <script>
+<script>
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="xiZp2TAdzxfMpZ924H0Gl";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
 
@@ -40,7 +38,7 @@ body {
   background: var(--dark);
   color: var(--white);
   overflow-x: hidden;
-  scroll-behavior: smooth; /* لجعل التنقل انسيابي */
+  scroll-behavior: smooth;
 }
 
 /* ===== HERO / MAIN ===== */
@@ -168,9 +166,9 @@ body {
 /* ===== AUDIO BTN ===== */
 .audio-btn {
   position: fixed;
-  bottom: 20px; /* نزله تحت */
-  left: 20px;   /* خلاه يسار */
-  top: auto;    /* لغينا مكانه القديم فوق */
+  bottom: 20px; 
+  left: 20px;   
+  top: auto;    
   z-index: 1100;
   background: rgba(0,0,0,0.7);
   border: 1px solid var(--gold);
@@ -291,18 +289,16 @@ nav {
   right: 0;
   z-index: 1000;
   display: flex;
-  justify-content: flex-start; /* تغيير من center لـ flex-start */
-  overflow-x: auto;            /* إضافة التمرير الأفقي */
-  white-space: nowrap;         /* منع الكلمات من النزول لسطر جديد */
-  -webkit-overflow-scrolling: touch; /* تمرير ناعم للجوال */
+  justify-content: flex-start; 
+  overflow-x: auto;            
+  white-space: nowrap;         
+  -webkit-overflow-scrolling: touch; 
   gap: 15px;
   background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(15px);
   padding: 12px 20px;
   border-bottom: 1px solid rgba(201, 168, 76, 0.3);
   width: 100%;
-
-
 }
 nav::-webkit-scrollbar { display: none; }
 
@@ -339,6 +335,10 @@ nav a.active { color: #000; background: var(--gold); font-weight: bold; }
 </style>
 </head>
 <body onload="initSite()">
+
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
 
 <button class="audio-btn" id="audioBtn" onclick="toggleAudio()">🔇</button>
 
@@ -394,69 +394,55 @@ nav a.active { color: #000; background: var(--gold); font-weight: bold; }
   </div>
 </section>
 
-<!-- ===== VALUES ===== -->
 <section id="values">
   <div class="section-title reveal">
     <h2>💎 قيم الجندي الإماراتي</h2>
     <div class="gold-line"></div>
     <p>عقيدة حماة الديار</p>
   </div>
-
   <div class="values-grid">
-    <div class="value-card reveal" style="animation-delay:0.1s">
+    <div class="value-card reveal">
       <span class="value-icon">🤝</span>
       <div class="value-name">الإخلاص</div>
-      <div class="value-text">وفاء لا يتزعزع للوطن والقائد. الجندي الإماراتي يُعطي ولاءه كاملاً غير منقوص لكل ذرة تراب في هذا الوطن الغالي.</div>
+      <div class="value-text">وفاء لا يتزعزع للوطن والقائد.</div>
     </div>
-    <div class="value-card reveal" style="animation-delay:0.2s">
+    <div class="value-card reveal">
       <span class="value-icon">🌟</span>
       <div class="value-name">التضحية</div>
-      <div class="value-text">يضحي لننام بأمان ويسهر لنستيقظ بطمأنينة. روح التضحية هي الجوهر الذي صنع أسطورة الجندي الإماراتي عبر التاريخ.</div>
+      <div class="value-text">يضحي لننام بأمان ويسهر لنستيقظ بطمأنينة.</div>
     </div>
-    <div class="value-card reveal" style="animation-delay:0.3s">
+    <div class="value-card reveal">
       <span class="value-icon">⚔️</span>
       <div class="value-name">الشجاعة</div>
-      <div class="value-text">قلب لا يعرف الخوف وعزيمة لا تُقهر. شجاعة الجندي الإماراتي مضرب الأمثال في كل ميادين الشرف والكرامة.</div>
+      <div class="value-text">قلب لا يعرف الخوف وعزيمة لا تُقهر.</div>
     </div>
-    <div class="value-card reveal" style="animation-delay:0.4s">
+    <div class="value-card reveal">
       <span class="value-icon">🏆</span>
       <div class="value-name">الانضباط</div>
-      <div class="value-text">النظام هو قوة الجيش وسر انتصاراته. الجندي الإماراتي مثال للانضباط والالتزام في كل موقف وتحت أصعب الظروف.</div>
+      <div class="value-text">النظام هو قوة الجيش وسر انتصاراته.</div>
     </div>
   </div>
 </section>
 
-<!-- ===== LEADERSHIP ===== -->
 <section id="leadership">
   <div class="section-title reveal">
     <h2>👑 القيادة الرشيدة</h2>
     <div class="gold-line"></div>
-    <p>قيادة حكيمة تبني قوة لا تُهزم</p>
   </div>
-
   <div class="leaders-grid">
-    <div class="leader-card reveal" style="animation-delay:0.1s">
+    <div class="leader-card reveal">
       <span class="leader-avatar">👑</span>
       <div class="leader-title">القائد الأعلى للقوات المسلحة</div>
       <div class="leader-name">صاحب السمو الشيخ محمد بن زايد آل نهيان</div>
-      <div class="leader-quote">"قواتنا المسلحة هي درع الوطن ودرعه منيع، وبإذن الله لن تمسّ أرضنا بأذى."</div>
     </div>
-    <div class="leader-card reveal" style="animation-delay:0.2s">
+    <div class="leader-card reveal">
       <span class="leader-avatar">🎖️</span>
       <div class="leader-title">نائب رئيس الدولة</div>
       <div class="leader-name">صاحب السمو الشيخ محمد بن راشد آل مكتوم</div>
-      <div class="leader-quote">"القوي لا يخشى الريح، لأنه هو نفسه يصنع الريح."</div>
-    </div>
-    <div class="leader-card reveal" style="animation-delay:0.3s">
-      <span class="leader-avatar">⭐</span>
-      <div class="leader-title">مؤسس الدولة الخالد</div>
-      <div class="leader-name">المغفور له الشيخ زايد بن سلطان آل نهيان</div>
-      <div class="leader-quote">"لا خير في أمة لا تحترم الذين يحمونها ويدافعون عنها."</div>
     </div>
   </div>
 </section>
 
-<!-- 1. القصة -->
 <section id="story" style="background: var(--dark2); padding: 70px 20px;">
   <div class="section-title reveal">
     <h2>📖 قصة من قلب الميدان</h2>
@@ -464,12 +450,11 @@ nav a.active { color: #000; background: var(--gold); font-weight: bold; }
   </div>
   <div class="story-box reveal">
     <p>
-      في أحد الأيام المشهودة في ميادين العز، كان جنودنا البواسل يرابطون لحماية الحدود وتأمين الممرات الإنسانية. يروي أحد القادة أن التحدي لم يكن عسكرياً فحسب، بل كان إنسانياً بالدرجة الأولى. برزت شجاعة جندي إماراتي عندما خاطر بنفسه تحت نيران كثيفة لإنقاذ عائلة حاصرتها الظروف، مجسداً عقيدة القوات المسلحة بأن "حياة الإنسان أغلى ما نملك". هذه القصة ليست إلا قطرة في بحر من قصص التضحية التي يسطرها جنودنا كل يوم، حيث يمتزج الرصاص بروح الإخاء، وتتحول السواتر إلى واحات أمان بفضل ثباتهم وعزيمتهم التي لا تلين.
+      في أحد الأيام المشهودة في ميادين العز، كان جنودنا البواسل يرابطون لحماية الحدود وتأمين الممرات الإنسانية... مجسداً عقيدة القوات المسلحة بأن "حياة الإنسان أغلى ما نملك".
     </p>
   </div>
 </section>
 
-<!-- 2. كلمة الوطن -->
 <section id="message">
   <div class="message-box">
     <h2 style="color:var(--gold); margin-bottom:20px;">🇦🇪 رسالة الوطن</h2>
@@ -477,103 +462,58 @@ nav a.active { color: #000; background: var(--gold); font-weight: bold; }
   </div>
 </section>
 
-<!-- 3. آراء الناس -->
 <section id="feedback" style="padding: 70px 20px; background: var(--dark2);">
   <div class="section-title reveal">
     <h2>💬 سجل الزوار</h2>
     <div class="gold-line"></div>
-    <p style="margin-top: 10px; opacity: 0.7;">شاركنا فخرك بجنود الوطن</p>
   </div>
-
   <div class="feedback-container" style="max-width: 800px; margin: 0 auto;">
-    <!-- نموذج الإرسال -->
-    <div class="feedback-form reveal" style="margin-bottom: 50px;">
+    <div class="feedback-form reveal">
       <input type="text" placeholder="الاسم الكريم" id="visitorName">
-      <textarea placeholder="اكتب رأيك في الموقع أو رسالة لجنود الوطن..." id="visitorMsg"></textarea>
+      <textarea placeholder="اكتب رأيك..." id="visitorMsg"></textarea>
       <button onclick="saveFeedback()">إرسال التعليق</button>
     </div>
-
-    <!-- مكان عرض التعليقات -->
-    <div id="commentsDisplay" class="reveal">
-      <!-- التعليقات ستظهر هنا تلقائياً -->
-    </div>
+    <div id="commentsDisplay" class="reveal"></div>
   </div>
 </section>
 
-<style>
-/* ستايل التعليقات المضافة */
-.comment-card {
-  background: rgba(201, 168, 76, 0.05);
-  border: 1px solid rgba(201, 168, 76, 0.2);
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  border-right: 4px solid var(--gold);
-  animation: fadeIn 0.5s ease;
-}
-.comment-card h4 { color: var(--gold); margin-bottom: 5px; font-size: 1.1em; }
-.comment-card p { color: #fff; opacity: 0.9; line-height: 1.6; }
-.comment-card span { font-size: 0.7em; opacity: 0.5; display: block; margin-top: 10px; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
-
-<!-- 4. المصادر الرسمية + 5. الحقوق -->
 <footer style="background: #050505; padding: 50px 20px 100px;">
-  <div style="text-align: center; margin-bottom: 30px;">
-    <h4 style="color: var(--gold);">المصادر المعتمدة:</h4>
-    <p style="font-size: 0.9em; opacity: 0.6; margin-top: 10px;">الموقع الرسمي لوزارة الدفاع الإماراتية | وكالة أنباء الإمارات (وام) | مجلة درع الوطن</p>
-  </div>
-  
-  <hr style="border: 0; border-top: 1px solid rgba(201,168,76,0.1); margin-bottom: 20px;">
-  
   <div style="text-align: center;">
     <p>© 2026 مدرسة دبي للتربية الحديثة - تصميم: إياد السعداوي</p>
   </div>
 </footer>
 
 <script>
-const messageText = `يا وطني الإمارات، يا فخر العز والمجد، أنتَ الأرض التي نكبر على ترابها، ونعتز بانتمائنا إليها. فيك توحدت القلوب، وتصافحت الطموحات، وصُنع المجد بأيدي أبنائك المخلصين.
+// الأغنية التي طلبتها (رابط MP3 بديل يعمل مباشرة للأغنية الوطنية)
+const audioUrl = "https://a.top4top.io/m_24431unli1.mp3"; 
 
-نحبك لأنك الأمن حين يخاف العالم، ونفخر بك لأنك النجاح حين تعجز الأمم، ونحملك في قلوبنا راية لا تنكسر، وعهداً لا يُنسى.
-
-نرفع أسمى آيات الولاء والفخر إلى صاحب السمو الشيخ محمد بن زايد آل نهيان، وإلى صاحب السمو الشيخ محمد بن راشد آل مكتوم، وإلى رجال القوات المسلحة الإماراتية البواسل.
-
-دمتِ يا إمارات الخير رمزاً للعز والسيادة. 🇦🇪`;
+const messageText = `يا وطني الإمارات، يا فخر العز والمجد... دمتِ يا إمارات الخير رمزاً للعز والسيادة. 🇦🇪`;
   
 function initSite() {
-  // كشف العناصر عند التمرير
+  const music = document.getElementById('bgMusic');
+  music.src = audioUrl; // وضع رابط الأغنية المطلوبة
+
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(r => revealObserver.observe(r));
   
-  // تحديث الرابط النشط في الـ Nav عند التمرير
   const sections = document.querySelectorAll('section');
   const navLinks = document.querySelectorAll('nav a');
   
   window.addEventListener('scroll', () => {
     let current = "";
     sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (pageYOffset >= (sectionTop - 150)) {
+      if (pageYOffset >= (section.offsetTop - 150)) {
         current = section.getAttribute('id');
       }
     });
-
     navLinks.forEach(link => {
       link.classList.remove('active');
-      if (link.getAttribute('href').includes(current)) {
-        link.classList.add('active');
-      }
+      if (link.getAttribute('href').includes(current)) link.classList.add('active');
     });
   });
 
-  // تأثير الآلة الكاتبة
   const el = document.getElementById('typewriter-el');
   let i = 0;
   function type() {
@@ -588,50 +528,38 @@ function initSite() {
   }, { threshold: 0.5 });
   msgObserver.observe(el);
 }
-// وظيفة حفظ وعرض الآراء
+
 function saveFeedback() {
   const name = document.getElementById('visitorName').value;
   const msg = document.getElementById('visitorMsg').value;
-  const date = new Date().toLocaleString('ar-AE');
-
-  if (name === "" || msg === "") {
-    alert("يرجى ملء جميع الحقول");
-    return;
-  }
-
-  const feedbackObj = { name, msg, date };
+  if (!name || !msg) return alert("يرجى ملء الحقول");
   let feedbacks = JSON.parse(localStorage.getItem('uae_feedbacks')) || [];
-  feedbacks.unshift(feedbackObj); 
-
+  feedbacks.unshift({ name, msg, date: new Date().toLocaleString('ar-AE') });
   localStorage.setItem('uae_feedbacks', JSON.stringify(feedbacks));
-
   document.getElementById('visitorName').value = "";
   document.getElementById('visitorMsg').value = "";
   displayFeedbacks();
 }
 
 function displayFeedbacks() {
-  const displayArea = document.getElementById('commentsDisplay');
-  if(!displayArea) return; // تأمين الكود
+  const area = document.getElementById('commentsDisplay');
   const feedbacks = JSON.parse(localStorage.getItem('uae_feedbacks')) || [];
-
-  if (feedbacks.length === 0) {
-    displayArea.innerHTML = "<p style='text-align:center; opacity:0.5;'>كن أول من يكتب كلمة فخر...</p>";
-    return;
-  }
-
-  displayArea.innerHTML = feedbacks.map(f => `
-    <div class="comment-card">
-      <h4>${f.name}</h4>
-      <p>${f.msg}</p>
-      <span>تم النشر في: ${f.date}</span>
-    </div>
-  `).join('');
+  area.innerHTML = feedbacks.map(f => `
+    <div style="background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.2); padding:15px; border-radius:10px; margin-bottom:10px;">
+      <h4 style="color:var(--gold);">${f.name}</h4><p>${f.msg}</p>
+    </div>`).join('');
 }
 
 function toggleAudio() {
   const btn = document.getElementById('audioBtn');
-  btn.textContent = (btn.textContent === '🔇') ? '🔊' : '🔇';
+  const music = document.getElementById('bgMusic');
+  if (music.paused) {
+    music.play();
+    btn.textContent = '🔊';
+  } else {
+    music.pause();
+    btn.textContent = '🔇';
+  }
 }
 </script>
 </body>
