@@ -40,6 +40,7 @@ body {
   background: var(--dark);
   color: var(--white);
   overflow-x: hidden;
+  scroll-behavior: smooth; /* لجعل التنقل انسيابي */
 }
 
 /* ===== HERO / MAIN ===== */
@@ -258,7 +259,7 @@ body {
 
 .leader-card { background: #111; border: 1px solid rgba(201,168,76,0.2); border-radius: 16px; padding: 30px; text-align: center; }
 
-/* ===== MESSAGE SECTION (FIXED FOR ARABIC) ===== */
+/* ===== MESSAGE SECTION ===== */
 #message { padding: 100px 20px; background: #000; text-align: center; }
 .message-box {
   max-width: 800px;
@@ -285,18 +286,44 @@ body {
   vertical-align: middle;
 }
 
-/* ===== NAV ===== */
+/* ===== UPDATED NAV ===== */
 nav {
   position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-  z-index: 500; display: flex; gap: 5px; background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(10px); padding: 8px 15px; border-radius: 50px; border: 1px solid rgba(201,168,76,0.2);
+  z-index: 1000; display: flex; gap: 2px; background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(12px); padding: 8px 12px; border-radius: 50px; border: 1px solid rgba(201,168,76,0.3);
+  width: auto; max-width: 95vw; overflow-x: auto; scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+
+nav a { 
+  color: rgba(255,255,255,0.6); 
+  text-decoration: none; 
+  font-size: 0.75em; 
+  padding: 8px 14px; 
+  white-space: nowrap; 
+  transition: 0.3s;
+  border-radius: 20px;
 }
 
-nav a { color: #fff; text-decoration: none; font-size: 0.75em; padding: 8px 12px; }
+nav a:hover { color: var(--gold); }
+nav a.active { color: #000; background: var(--gold); font-weight: bold; }
 
 /* ===== REVEAL ===== */
 .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== STORY & ACHIEVEMENTS STYLE ===== */
+.story-box { max-width: 800px; margin: 0 auto; padding: 40px; background: rgba(201,168,76,0.05); border-radius: 15px; border-left: 4px solid var(--gold); font-style: italic; line-height: 2; text-align: justify; }
+.achievements-container { max-width: 900px; margin: 0 auto; padding: 20px; border-right: 2px solid var(--gold); }
+.ach-item { margin-bottom: 40px; position: relative; padding-right: 30px; }
+.ach-year { font-weight: 900; color: var(--gold); font-size: 1.5em; margin-bottom: 5px; }
+.ach-content h3 { color: #fff; margin-bottom: 10px; }
+.ach-content p { color: rgba(255,255,255,0.7); line-height: 1.7; }
+
+/* ===== FEEDBACK STYLE ===== */
+.feedback-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+.feedback-form input, .feedback-form textarea { background: #111; border: 1px solid #333; color: #fff; padding: 15px; border-radius: 10px; font-family: 'Cairo'; }
+.feedback-form button { background: var(--gold); color: #000; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
 
 </style>
 </head>
@@ -304,13 +331,15 @@ nav a { color: #fff; text-decoration: none; font-size: 0.75em; padding: 8px 12px
 
 <button class="audio-btn" id="audioBtn" onclick="toggleAudio()">🔇</button>
 
-<nav>
-  <a href="#hero">الرئيسية</a>
+<nav id="mainNav">
+  <a href="#hero" class="active">الرئيسية</a>
   <a href="#dashboard">العمليات</a>
   <a href="#branches">الأفرع</a>
   <a href="#values">القيم</a>
   <a href="#leadership">القيادة</a>
-  <a href="#message">الرسالة</a>
+  <a href="#story">القصة</a>
+  <a href="#message">كلمة الوطن</a>
+  <a href="#feedback">سجل الزوار</a>
 </nav>
 
 <section id="hero">
@@ -416,82 +445,8 @@ nav a { color: #fff; text-decoration: none; font-size: 0.75em; padding: 8px 12px
   </div>
 </section>
 
-<section id="message">
-  <div class="message-box">
-    <h2 style="color:var(--gold); margin-bottom:20px;">🇦🇪 رسالة الوطن</h2>
-    <div class="typewriter-text" id="typewriter-el"></div>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 مدرسة دبي للتربية الحديثة - تصميم: إياد السعداوي</p>
-</footer>
-
-    <footer style="background: #050505; padding: 50px 20px;">
-  <div style="text-align: center; margin-bottom: 20px;">
-    <h4 style="color: var(--gold);">المصادر المعتمدة:</h4>
-    <p style="font-size: 0.8em; opacity: 0.6;">الموقع الرسمي لوزارة الدفاع الإماراتية | وكالة أنباء الإمارات (وام) | مجلة درع الوطن</p>
-  </div>
-      
-  <section id="feedback">
-  <div class="section-title reveal">
-    <h2>💬 سجل الزوار</h2>
-    <div class="gold-line"></div>
-  </div>
-  <div class="feedback-form reveal">
-    <input type="text" placeholder="الاسم الكريم" id="visitorName">
-    <textarea placeholder="اكتب رأيك في الموقع أو رسالة لجنود الوطن..." id="visitorMsg"></textarea>
-    <button onclick="alert('شكراً لرأيك! تم إرساله بنجاح.')">إرسال التعليق</button>
-  </div>
-</section>
-
-<style>
-.feedback-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
-.feedback-form input, .feedback-form textarea { background: #111; border: 1px solid #333; color: #fff; padding: 15px; border-radius: 10px; font-family: 'Cairo'; }
-.feedback-form button { background: var(--gold); color: #000; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
-</style>
-
-<footer style="background: #050505; padding: 50px 20px;">
-  <div style="text-align: center; margin-bottom: 20px;">
-    <h4 style="color: var(--gold);">المصادر المعتمدة:</h4>
-    <p style="font-size: 0.8em; opacity: 0.6;">الموقع الرسمي لوزارة الدفاع الإماراتية | وكالة أنباء الإمارات (وام) | مجلة درع الوطن</p>
-  </div>
-
-  <section id="achievements">
-  <div class="section-title reveal">
-    <h2>⚔️ مسيرة المجد والعطاء</h2>
-    <div class="gold-line"></div>
-    <p>إنجازات عسكرية محلية ودور إنساني عالمي</p>
-  </div>
-
-  <div class="achievements-container reveal">
-    <div class="ach-item">
-      <div class="ach-year">1976</div>
-      <div class="ach-content">
-        <h3>توحيد القوات المسلحة</h3>
-        <p>القرار التاريخي بتوحيد القوات المسلحة تحت علم واحد وقيادة واحدة، لتكون الدرع الحصين للاتحاد.</p>
-      </div>
-    </div>
-
-    <div class="ach-item">
-      <div class="ach-year">2014</div>
-      <div class="ach-content">
-        <h3>الخدمة الوطنية</h3>
-        <p>إصدار قانون الخدمة الوطنية، لتعزيز قيم الولاء والانتماء والجاهزية لدى شباب الوطن.</p>
-      </div>
-    </div>
-
-    <div class="ach-item">
-      <div class="ach-year">🛡️</div>
-      <div class="ach-content">
-        <h3>المساعدات الإنسانية (حماية السلم)</h3>
-        <p>شاركت القوات المسلحة في مهام حفظ السلام عالمياً، من الصومال إلى كوسوفو، وتقديم المساعدات الإغاثية في الكوارث عبر عملية "الفارس الشهم"، مما يعكس الوجه الإنساني لجنودنا.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <section id="story" style="background: var(--dark2);">
+<!-- 1. القصة -->
+<section id="story" style="background: var(--dark2); padding: 70px 20px;">
   <div class="section-title reveal">
     <h2>📖 قصة من قلب الميدان</h2>
     <div class="gold-line"></div>
@@ -503,17 +458,40 @@ nav a { color: #fff; text-decoration: none; font-size: 0.75em; padding: 8px 12px
   </div>
 </section>
 
-<style>
-.story-box { max-width: 800px; margin: 0 auto; padding: 40px; background: rgba(201,168,76,0.05); border-radius: 15px; border-left: 4px solid var(--gold); font-style: italic; line-height: 2; text-align: justify; }
-</style>
+<!-- 2. كلمة الوطن -->
+<section id="message">
+  <div class="message-box">
+    <h2 style="color:var(--gold); margin-bottom:20px;">🇦🇪 رسالة الوطن</h2>
+    <div class="typewriter-text" id="typewriter-el"></div>
+  </div>
+</section>
 
-<style>
-.achievements-container { max-width: 900px; margin: 0 auto; padding: 20px; border-right: 2px solid var(--gold); }
-.ach-item { margin-bottom: 40px; position: relative; padding-right: 30px; }
-.ach-year { font-weight: 900; color: var(--gold); font-size: 1.5em; margin-bottom: 5px; }
-.ach-content h3 { color: #fff; margin-bottom: 10px; }
-.ach-content p { color: rgba(255,255,255,0.7); line-height: 1.7; }
-</style>
+<!-- 3. آراء الناس -->
+<section id="feedback" style="padding: 70px 20px; background: var(--dark2);">
+  <div class="section-title reveal">
+    <h2>💬 سجل الزوار</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="feedback-form reveal">
+    <input type="text" placeholder="الاسم الكريم" id="visitorName">
+    <textarea placeholder="اكتب رأيك في الموقع أو رسالة لجنود الوطن..." id="visitorMsg"></textarea>
+    <button onclick="alert('شكراً لرأيك! تم إرساله بنجاح.')">إرسال التعليق</button>
+  </div>
+</section>
+
+<!-- 4. المصادر الرسمية + 5. الحقوق -->
+<footer style="background: #050505; padding: 50px 20px 100px;">
+  <div style="text-align: center; margin-bottom: 30px;">
+    <h4 style="color: var(--gold);">المصادر المعتمدة:</h4>
+    <p style="font-size: 0.9em; opacity: 0.6; margin-top: 10px;">الموقع الرسمي لوزارة الدفاع الإماراتية | وكالة أنباء الإمارات (وام) | مجلة درع الوطن</p>
+  </div>
+  
+  <hr style="border: 0; border-top: 1px solid rgba(201,168,76,0.1); margin-bottom: 20px;">
+  
+  <div style="text-align: center;">
+    <p>© 2026 مدرسة دبي للتربية الحديثة - تصميم: إياد السعداوي</p>
+  </div>
+</footer>
 
 <script>
 const messageText = `يا وطني الإمارات، يا فخر العز والمجد، أنتَ الأرض التي نكبر على ترابها، ونعتز بانتمائنا إليها. فيك توحدت القلوب، وتصافحت الطموحات، وصُنع المجد بأيدي أبنائك المخلصين.
@@ -525,11 +503,35 @@ const messageText = `يا وطني الإمارات، يا فخر العز وا�
 دمتِ يا إمارات الخير رمزاً للعز والسيادة. 🇦🇪`;
   
 function initSite() {
-  const observer = new IntersectionObserver((entries) => {
+  // كشف العناصر عند التمرير
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+  document.querySelectorAll('.reveal').forEach(r => revealObserver.observe(r));
   
+  // تحديث الرابط النشط في الـ Nav عند التمرير
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+  
+  window.addEventListener('scroll', () => {
+    let current = "";
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= (sectionTop - 150)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').includes(current)) {
+        link.classList.add('active');
+      }
+    });
+  });
+
+  // تأثير الآلة الكاتبة
   const el = document.getElementById('typewriter-el');
   let i = 0;
   function type() {
