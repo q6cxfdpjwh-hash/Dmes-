@@ -1,29 +1,35 @@
-// --- ENTRY ---
-function enterSite() {
-  const btn = document.querySelector('.loyalty-btn');
-  const entryScreen = document.getElementById('entry-screen');
+// --- ENTRY --- 
+function enterSite() { 
+    const btn = document.querySelector('.loyalty-btn'); 
+    const entryScreen = document.getElementById('entry-screen'); 
 
-  // إعطاء انطباع بصري عند الضغط
-  btn.textContent = '🎖️ تم التأكيد...';
-  btn.style.background = 'linear-gradient(135deg, #00732f, #00a844)';
-  btn.style.transform = 'scale(0.95)';
+    // 1. إعطاء انطباع بصري فوري عند الضغط
+    btn.textContent = '🎖️ تم التأكيد...'; 
+    btn.style.background = 'linear-gradient(135deg, #00732f, #00a844)'; 
+    btn.style.transform = 'scale(0.95)'; 
 
-  // تشغيل الصوت التنبيهي
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    playMilitaryBeep(ctx);
-  } catch(e) { console.log("Audio not supported"); }
+    // 2. محاولة تشغيل الصوت التنبيهي
+    try { 
+        const ctx = new (window.AudioContext || window.webkitAudioContext)(); 
+        playMilitaryBeep(ctx); 
+    } catch(e) { 
+        console.log("Audio not supported"); 
+    } 
 
-  // الحركة السلسة للإخفاء
-  setTimeout(() => {
-    entryScreen.style.opacity = '0';
-    entryScreen.style.transition = 'opacity 0.8s ease';
-    
-    setTimeout(() => {
-      entryScreen.style.display = 'none'; // إزالة العنصر تماماً من الصفحة
-      document.getElementById('audioBtn').style.display = 'flex';
-      startTypewriter();
-      initScrollReveal();
-    }, 800);
-  }, 400);
+    // 3. بدء حركة الاختفاء بعد 400 مللي ثانية
+    setTimeout(() => { 
+        entryScreen.style.opacity = '0'; 
+        entryScreen.style.transition = 'opacity 0.8s ease'; 
+
+        // 4. إزالة الشاشة تماماً من الصفحة بعد انتهاء الـ Fade
+        setTimeout(() => { 
+            entryScreen.style.display = 'none'; 
+            document.getElementById('audioBtn').style.display = 'flex'; 
+            
+            // تشغيل الأنظمة الأخرى
+            if (typeof startTypewriter === "function") startTypewriter(); 
+            if (typeof initScrollReveal === "function") initScrollReveal(); 
+        }, 800); 
+    }, 400); 
 }
+
