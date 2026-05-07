@@ -471,13 +471,44 @@ nav a.active { color: #000; background: var(--gold); font-weight: bold; }
   <div class="section-title reveal">
     <h2>💬 سجل الزوار</h2>
     <div class="gold-line"></div>
+    <p style="margin-top: 10px; opacity: 0.7;">شاركنا فخرك بجنود الوطن</p>
   </div>
-  <div class="feedback-form reveal">
-    <input type="text" placeholder="الاسم الكريم" id="visitorName">
-    <textarea placeholder="اكتب رأيك في الموقع أو رسالة لجنود الوطن..." id="visitorMsg"></textarea>
-    <button onclick="alert('شكراً لرأيك! تم إرساله بنجاح.')">إرسال التعليق</button>
+
+  <div class="feedback-container" style="max-width: 800px; margin: 0 auto;">
+    <!-- نموذج الإرسال -->
+    <div class="feedback-form reveal" style="margin-bottom: 50px;">
+      <input type="text" placeholder="الاسم الكريم" id="visitorName">
+      <textarea placeholder="اكتب رأيك في الموقع أو رسالة لجنود الوطن..." id="visitorMsg"></textarea>
+      <button onclick="saveFeedback()">إرسال التعليق</button>
+    </div>
+
+    <!-- مكان عرض التعليقات -->
+    <div id="commentsDisplay" class="reveal">
+      <!-- التعليقات ستظهر هنا تلقائياً -->
+    </div>
   </div>
 </section>
+
+<style>
+/* ستايل التعليقات المضافة */
+.comment-card {
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border-right: 4px solid var(--gold);
+  animation: fadeIn 0.5s ease;
+}
+.comment-card h4 { color: var(--gold); margin-bottom: 5px; font-size: 1.1em; }
+.comment-card p { color: #fff; opacity: 0.9; line-height: 1.6; }
+.comment-card span { font-size: 0.7em; opacity: 0.5; display: block; margin-top: 10px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 
 <!-- 4. المصادر الرسمية + 5. الحقوق -->
 <footer style="background: #050505; padding: 50px 20px 100px;">
@@ -545,6 +576,46 @@ function initSite() {
     if(entries[0].isIntersecting) { type(); msgObserver.disconnect(); }
   }, { threshold: 0.5 });
   msgObserver.observe(el);
+}
+// وظيفة حفظ وعرض الآراء
+function saveFeedback() {
+  const name = document.getElementById('visitorName').value;
+  const msg = document.getElementById('visitorMsg').value;
+  const date = new Date().toLocaleString('ar-AE');
+
+  if (name === "" || msg === "") {
+    alert("يرجى ملء جميع الحقول");
+    return;
+  }
+
+  const feedbackObj = { name, msg, date };
+  let feedbacks = JSON.parse(localStorage.getItem('uae_feedbacks')) || [];
+  feedbacks.unshift(feedbackObj); 
+
+  localStorage.setItem('uae_feedbacks', JSON.stringify(feedbacks));
+
+  document.getElementById('visitorName').value = "";
+  document.getElementById('visitorMsg').value = "";
+  displayFeedbacks();
+}
+
+function displayFeedbacks() {
+  const displayArea = document.getElementById('commentsDisplay');
+  if(!displayArea) return; // تأمين الكود
+  const feedbacks = JSON.parse(localStorage.getItem('uae_feedbacks')) || [];
+
+  if (feedbacks.length === 0) {
+    displayArea.innerHTML = "<p style='text-align:center; opacity:0.5;'>كن أول من يكتب كلمة فخر...</p>";
+    return;
+  }
+
+  displayArea.innerHTML = feedbacks.map(f => `
+    <div class="comment-card">
+      <h4>${f.name}</h4>
+      <p>${f.msg}</p>
+      <span>تم النشر في: ${f.date}</span>
+    </div>
+  `).join('');
 }
 
 function toggleAudio() {
